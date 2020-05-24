@@ -1,13 +1,11 @@
-﻿using System.Collections.Generic;
-using Business.Entities;
+﻿using Business.Entities;
 using Business.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
-    public class ValuesController : ControllerBase
+    public class ValuesController : Controller
     {
         private readonly ICommentService _commentService;
 
@@ -16,60 +14,21 @@ namespace API.Controllers
             _commentService = commentService;
         }
 
-        // GET api/values
+       // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public ActionResult<string> Get()
         {
-            return new string[] { "value1", "value2" };
-        }
+            var data = _commentService.GetComments();
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
-        {
-            //_commentService.AddComment();
-
-            var test = new List<Comment>
-            {
-                new Comment
-                {
-                    IdComment = 1,
-                    Quote = "Clase de ejercicio",
-                    User = "Daniel Cantor",
-                    IdColumn = 1
-                },
-                new Comment
-                {
-                    IdComment = 2,
-                    Quote = "Vamos aprendiendo React",
-                    User = "Daniel Cantor",
-                    IdColumn = 1
-                },
-                new Comment
-                {
-                    IdComment = 3,
-                    Quote = "Aún no se hacer autenticación",
-                    User = "Daniel Cantor",
-                    IdColumn = 2
-                },
-                new Comment
-                {
-                    IdComment = 4,
-                    Quote = "Porque es viernes",
-                    User = "Daniel Cantor",
-                    IdColumn = 3
-                }
-            };
-
-
-
-            return Ok(test);
+            return Ok(data);
         }
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody] string value)
+        public bool Post([FromBody] Comment comment)
         {
+            _commentService.SetComment(comment);
+            return true;
         }
 
         // PUT api/values/5

@@ -8,7 +8,7 @@ namespace Persistence.Maps
     {
         public void Configure(EntityTypeBuilder<Comment> builder)
         {
-            builder.ToTable("Debts");
+            builder.ToTable("Comments");
             builder.HasKey(x => x.IdComment);
         }
     }

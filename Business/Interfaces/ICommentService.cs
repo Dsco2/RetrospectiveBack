@@ -1,7 +1,11 @@
-﻿namespace Business.Interfaces
+﻿using System.Collections.Generic;
+using Business.Entities;
+
+namespace Business.Interfaces
 {
     public interface ICommentService
     {
-        bool AddComment();
+        List<Comment> GetComments();
+        bool SetComment(Comment comment);
     }
 }

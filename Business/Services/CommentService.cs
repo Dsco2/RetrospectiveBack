@@ -1,4 +1,6 @@
-﻿using Business.Interfaces;
+﻿using System.Collections.Generic;
+using Business.Entities;
+using Business.Interfaces;
 
 namespace Business.Services
 {
@@ -11,9 +13,14 @@ namespace Business.Services
             _commentRepository = commentRepository;
         }
 
-        public bool AddComment()
+        public List<Comment> GetComments()
         {
-            return _commentRepository.AddComment();
+            return _commentRepository.GetComments();
+        }
+
+        public bool SetComment(Comment comment)
+        {
+            return _commentRepository.SetComment(comment);
         }
     }
 }

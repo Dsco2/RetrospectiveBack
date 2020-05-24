@@ -1,4 +1,6 @@
-﻿using Business.Entities;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Business.Entities;
 using Business.Interfaces;
 
 namespace Persistence.Repositories
@@ -12,9 +14,15 @@ namespace Persistence.Repositories
             _context = context;
         }
 
-        public bool AddComment()
+        public List<Comment> GetComments()
         {
-            _context.Comments.Add(new Comment());
+            var data = _context.Comments.ToList();
+            return data;
+        }
+
+        public bool SetComment(Comment comment)
+        {
+            _context.Comments.Add(comment);
             return _context.SaveChanges() > 0;
         }
     }
